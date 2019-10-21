@@ -58,8 +58,7 @@ class Pedidos
 
 	public static function MontaPedido(){
 		$user = session()->getId();
-		echo "<br>";
-		echo $user."--- novo s24pedido";
+
 		//echo $user;
 			$pedido_cardapio=DB::table('pedido_x_ingrediente')
 		->join('cardapio','cardapio.cardapio_id','=','pedido_x_ingrediente.cardapio_id')
