@@ -6,9 +6,9 @@ use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\LabelAlignment;
 use Endroid\QrCode\Response\QrCodeResponse;
 class QRcode1  {
-	 public static function QRCODE(){
+	 public static function QRCODE($id){
 
-		$qrCode = new QrCode('https://www.google.com');
+		$qrCode = new QrCode('http://192.168.43.226:7945/produtos/lista_vendedor/'.$id);
 		$qrCode->setSize(300);
 		$qrCode->setMargin(10);
 		$qrCode->setEncoding('UTF-8');
@@ -19,7 +19,6 @@ class QRcode1  {
 // Set advanced options
 		$qrCode->setWriterByName('svg');
 
-		header('Content-Type: '.$qrCode->getContentType());
 
 		echo $qrCode->writeString();
 

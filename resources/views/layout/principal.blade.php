@@ -6,9 +6,12 @@
 	  <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<!-- <link rel="stylesheet" type="text/css" href="/css/app.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="/css/app.css"> -->   
 	<link rel="stylesheet" type="text/css" href="/css/menu.css">
+      <script src="/js/jquery.js" type="text/javascript" charset="utf-8" async defer></script>
 
+    <script src="/js/funcoes.js" type="text/javascript" charset="utf-8" async defer></script>
+   
 	<title>DoltFood</title>
 	
     <!-- Bootstrap CSS CDN -->
@@ -30,7 +33,8 @@
             <div class="sidebar-header">
                 <h3>DoltFood</h3>
             </div>
-
+            <?php 
+            if(\Auth::check()){?>
             <ul class="list-unstyled components">
                
                 <li class="active">
@@ -82,18 +86,58 @@
                     <a class="tag_a" href="" class="download">Fale Conosco</a>
                 </li>
             </ul>
+        <?php }else{
+            ?>
+            <table class="table">
+            <?php
+            if(isset($retorno['pedido_cardapio'])){              
+
+            $pedido_cardapio=$retorno['pedido_cardapio'];
+         foreach($pedido_cardapio as $p):?>
+<?php
+ $cardapio_descr=$p->cardapio_descr;
+
+ if($cardapio_descr!=$cardapio_antigo){?>
+        <td colspan="4"><b><?= $p->cardapio_descr ?></b></td>
+
+ <?php }else{?>
+
+
+<?php } ?>
+<tr>
+<td><?= $p->ingrediente_descr ?></td> 
+<td><?= $p->ingrediente_valor ?></td>
+
+
+</td></tr>
+
+<?php $cardapio_antigo=$cardapio_descr; ?>
+<?php endforeach ?>
+        <?php   }else{?>
+ <button type="button" id="monta_pedido" class="btn btn-info" onclick="window.location.href='/'">
+                      Montar Pedido
+                        
+                    </button> 
+       <?php  }}?>
         </nav>
 <h1></h1>
-
+</table>
 </div>
 
 
    <div id="content">
    	 <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
-                        <span>Esconder Menu</span>
-                    </button>
-               
+                        <span>Menu</span>
+                    </button>    
+
+
+
+<h1></h1>
+
+
+
+   
 @yield('conteudo')
         
     </div>
@@ -117,6 +161,12 @@
                 $('.collapse.in').toggleClass('in');
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
+             $('#sidebar-rightCollapse').on('click', function () {
+                $('#sidebar-right,#content').toggleClass('active-right');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+
         });
     </script>
 

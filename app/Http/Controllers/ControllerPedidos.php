@@ -12,13 +12,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use cardapio\Http\Requests\PedidosRequest;
 use cardapio\Http\Controllers\Classes\QRcode1;
+use cardapio\Http\Controllers\Classes\Pedidos;
 
-
-
-use Endroid\QrCode\QrCode;
-use Endroid\QrCode\ErrorCorrectionLevel;
-use Endroid\QrCode\LabelAlignment;
-use Endroid\QrCode\Response\QrCodeResponse;
 
 class ControllerPedidos		 extends Controller
 {
@@ -26,22 +21,32 @@ class ControllerPedidos		 extends Controller
     public function __construct()
     {
 	
-        $this->middleware('autorizador');
-        
+       // $this->middleware('autorizador');
+   
+    	Pedidos::MontaPedido();
         
     }
-	//use AuthorizesRequests, DispatchesJobs, ValidatesRequests; 
+	use AuthorizesRequests, DispatchesJobs, ValidatesRequests; 
 
-
+	
 	public function novo_pedido(){
+		$session_id = session()->getId();
+		echo "<br>";
+		echo $session_id."--- novo pedido";
+		echo "<br>";
+		///selecionar pedido pendente do usuario 
+		$user=$session_id;
+		$pedido_numero=Pedidos::getPedidoGeral($user);
+
+
+
 		$cardapio_listagem=DB::table('cardapio_x_ingrediente')
 		->join('cardapio','cardapio.cardapio_id','=','cardapio_x_ingrediente.cardapio_id')
 		->join('ingrediente','ingrediente.ingrediente_id','=','cardapio_x_ingrediente.ingrediente_id')
 		->join('tipo_cardapio','cardapio.cardapio_tipo','=','tipo_cardapio.tipo_cardapio_id')
 		->where('cardapio_ativo', '=', '1')->select("*")->get();
 
-			 $this->QRCODE();
-		$pedido_numero=Request::route('id');
+	
 		$cardapio_antigo="";
 		$cont_cardapio=0;	
 		$ingrediente_array=array();	
@@ -80,12 +85,9 @@ class ControllerPedidos		 extends Controller
 		->where('pedido_id','=',$pedido_id)
 		->where('cardapio_id','=',$cardapio_id)
 		->count();
-		echo $registros_ingrediente;
-
+		
 
 		if($registros_ingrediente<=0){
-			
-		
 
 		$pedido_cardapio=DB::table('cardapio_x_ingrediente')
 		->join('cardapio','cardapio.cardapio_id','=','cardapio_x_ingrediente.cardapio_id')
@@ -118,7 +120,7 @@ class ControllerPedidos		 extends Controller
 			->join('cardapio','pedido_x_ingrediente.cardapio_id','=','cardapio.cardapio_id')
 			->join('ingrediente','ingrediente.ingrediente_id','=','pedido_x_ingrediente.ingrediente_id')
 			->where('cardapio_ativo', '=', '1')
-			->where('cardapio.cardapio_id','=',$cardapio_id)
+		
 			->where('pedido_x_ingrediente.pedido_id','=',$pedido_id)
 			->select("*")->get();
 		}
@@ -130,8 +132,36 @@ class ControllerPedidos		 extends Controller
 
 		return view('pedidos/lista_ingredientes')->with('retorno',$array_retorno);
 	}
-
+	public function lista_pedido_vendedor(){
+		$pedido_id=Request::route('id');
+		$pedido_ingrediente=0;
+		$registros_ingrediente=DB::table('pedido_x_ingrediente')
+		->where('pedido_id','=',$pedido_id)		
+		->count();
+		if($registros_ingrediente>0){
+			$pedido_ingrediente=DB::table('pedido_x_ingrediente')
+			
+			->join('ingrediente','ingrediente.ingrediente_id','=','pedido_x_ingrediente.ingrediente_id')	
+			
+			->where('pedido_x_ingrediente.pedido_id','=',$pedido_id)
+			->select("*")->get();
+		}
 	
+		
+
+		return view('pedidos/lista_vendedor')->with('pedido_ingrediente',$pedido_ingrediente);
+
+	}
+	public function gerarQR(PedidosRequest $request){
+
+    $params=$request->all();
+ 	
+
+    $id=$params['pedido_id'];
+		QRcode1::QRCODE($id);
+
+
+	}
 
 	public function salva_pedido(){
 		$pedido_id=Request::route('pedido_id');
@@ -168,19 +198,20 @@ class ControllerPedidos		 extends Controller
 	}
 	public function lista_cardapio(){
 		$pedido_id=0;
-		//QRcode1::QRCODE();
-		exit();
+		$session_id = session()->getId();
 		///selecionar pedido pendente do usuario 
-		$user=auth()->user()->id;
+		$user=$session_id;
+
+		//PHPSSEID
 	
-		$pedido_id=$this->getPedido($user);
+		$pedido_id=Pedidos::getPedido($user);
 		$data= Date('Y-m-d H:i:s');
 		//INSERT into pedido  (pedido_data,pedido_user,pedido_status,pedido_ativo) values
 	
 		if($pedido_id<=0){
 			 DB::table('pedido')->insert([
-    ['pedido_data' => $data, 'pedido_user'=>$user,'pedido_status'=>'CRIADO','pedido_ativo'=>1]]);
-			 $pedido_id=$this->getPedido($user);
+    ['pedido_data' => $data, 'pedido_user_temp'=>$user,'pedido_status'=>'CRIADO','pedido_ativo'=>1]]);
+			 $pedido_id=Pedidos::getPedido($user);
 
 		}
 
@@ -188,11 +219,11 @@ class ControllerPedidos		 extends Controller
 		->join('cardapio','cardapio.cardapio_id','=','pedido_x_ingrediente.cardapio_id')
 		->join('pedido','pedido.pedido_id','=','pedido_x_ingrediente.pedido_id')
 		->join('tipo_cardapio','cardapio.cardapio_id','=','tipo_cardapio.tipo_cardapio_id')
-		->join('login','login.id','=','pedido.pedido_user')
+	
 		->join('ingrediente','ingrediente.ingrediente_id','=','pedido_x_ingrediente.ingrediente_id')
 		->select('*')->get();
 	
-		$dados=array('cardapio'=>$cardapio_pedido_x_ingrediente,'pedido_id'=>$pedido_id);
+		$dados=array('cardapio'=>$cardapio_pedido_x_ingrediente);
 
 	
 		return view('pedidos/cardapio_listagem')->with('dados',$dados);
@@ -207,27 +238,7 @@ class ControllerPedidos		 extends Controller
 
 
 
-	public function getPedido($user){
-		$retorno=0;
-		$data= Date('Y-m-d H:i:s');
-		$pedido_pendente=DB::table('pedido')
-		->where('pedido_user', '=', $user)
-		->where('pedido_status','=','CRIADO')
-		->select('pedido_id')
-		->get();
-		if(count($pedido_pendente)<=0){
-			return $retorno;
-		}else{
-
-			foreach ($pedido_pendente as $p) {
-				$retorno=$p->pedido_id;
-			}
-			return $retorno;
-		}
-
-
-	}
-
+	
 }
 
 

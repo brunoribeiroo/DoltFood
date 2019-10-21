@@ -7,12 +7,14 @@ Route:: post('/login_auth',['uses'=>'LoginController@login']);
 Route:: get('/login/novo',['uses'=>'LoginController@novo']);
 Route:: post('/login/registro',['uses'=>'LoginController@registro']);
 
-Route:: get('/',['uses'=>'ControllerPedidos@lista_cardapio']);
+Route:: get('/',['uses'=>'ControllerPedidos@novo_pedido']);
 Route:: get('/produtos/mostra/{id}',['uses'=>'Controller@mostra']);
 Route:: get('/produtos/remove/{id}',['uses'=>'Controller@remove']);
-
+Route:: post('/pedidos/gerarQR',['uses'=>'ControllerPedidos@gerarQR']);
 Route:: get('/produtos/novo',['uses'=>'Controller@novo']);
 Route:: post('/produtos/adiciona',['uses'=>'Controller@adiciona']);
+Route:: get('/produtos/lista_vendedor/{pedido_id}',['uses'=>'ControllerPedidos@lista_pedido_vendedor']);
+
 
 Route:: get('/ingrediente/',['uses'=>'ControllerIngrediente@listagem']);
 Route:: get('/ingrediente/novo',['uses'=>'ControllerIngrediente@novo']);

@@ -22,7 +22,7 @@ class ControllerCardapio extends Controller
 
 
         $this->middleware('autorizador');
-        QRcode1::QRCODE();
+        
 
     }
     public function novo(){
@@ -42,6 +42,10 @@ class ControllerCardapio extends Controller
     $cardapio_descr=$params['nome_cardapio'];   
     $cardapio_tipo=$params['tipo_cardapio'];
 
+    $file = Request::file('image');
+   
+    $file_2 = Request::hasFile('image');
+    
 
    
 
@@ -49,6 +53,11 @@ class ControllerCardapio extends Controller
     ['cardapio_descr' => $cardapio_descr, 'cardapio_tipo'=>$cardapio_tipo,'cardapio_user'=>$cardapio_user,'cardapio_data_criacao'=>$cardapio_data_criacao]
 ]);
 
+        $cardapio_imagem = DB::table('cardapio')
+        ->max('cardapio_id');
+
+        $upload =$file->storeAs('cardapio', 'cardapio_'.$cardapio_imagem.'.png');
+        
 
           return redirect('cardapio/');
     }

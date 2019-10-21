@@ -2,7 +2,7 @@
 
 @section('conteudo')
 
-<form action="/cardapio/adiciona/" method="post">
+<form action="/cardapio/adiciona/" method="post" enctype="multipart/form-data">
 	<div class="form-group">
 		<input type="hidden" value="{{csrf_token()}}" name="_token" >
 	<label>Nome do Cardapio</label>
@@ -16,6 +16,7 @@
 		<option value="<?= $t->tipo_cardapio_id ?>"> <?= $t->tipo_cardapio_descr ?></option>
 		<?php  endforeach?>
 	</select>
+	 <input type="file" name="image">
 	</div>
 	
 

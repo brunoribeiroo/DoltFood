@@ -153,9 +153,113 @@ a.article:hover {
     color: #fff !important;
 }
 
+
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE RIGHT
+----------------------------------------------------- */
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#sidebar-right {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 85%;
+    height: 100vh;
+    z-index: 999;
+    background: red;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+#sidebar-right.active {
+    margin-left:100%;
+}
+
+#sidebar-right .sidebar-header {
+    padding: 20px;
+    background: red;
+}
+
+#sidebar-right ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid red;
+}
+
+#sidebar-right ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar-right ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar-right ul li a:hover {
+    color: red;
+    background: #fff;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: #fff;
+    background: red;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-right: 30px !important;
+    background: red;
+}
+
+ul.CTAs {
+    padding: 20px;
+}
+
+ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+a.download {
+    background: #fff;
+    color: red;
+}
+
+a.article,
+a.article:hover {
+    background: red !important;
+    color: #fff !important;
+}
+
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
+
+#content.all {
+    width: 100%;
+}
 
 #content {
     width: calc(100% - 250px);
@@ -165,6 +269,7 @@ a.article:hover {
     position: absolute;
     top: 0;
     right: 0;
+    background-color:white;
 }
 
 #content.active {
@@ -191,4 +296,132 @@ a.article:hover {
     #sidebarCollapse span {
         display: none;
     }
+
+
+    #sidebar-right {
+        margin-left:100%;
+    }
+    #sidebar-right.active {
+        margin-right: 0;
+    }
+    #content-right {
+        width: 100%;
+    }
+    #content-right.active {
+        width: calc(100% - 250px);
+    }
+    #sidebar-rightCollapse span {
+        display: none;
+    }
+
+    .cardapio_label{
+        
+
+    }
+
+
+}
+/*cardapio*/
+
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700");
+
+
+
+.container_cardapio {
+ 
+  position: relative;
+  margin-bottom: 25px;
+  width: 350px;
+  height: 250px;
+  background: #F5F5F5;
+  box-shadow: 5px 5px 15px #000000;
+  border-radius: 10px;
+  margin-right: 15px;
+}
+
+.item {
+    margin: 5px;
+    background: tomato;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.grid {
+    max-width: 400px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+}
+
+.desc {
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: 17px;
+  color: #4E4E4E;
+  font-size: .9em;
+  line-height: 1.6em;
+  margin-right: 25px;
+  text-align: justify;
+}
+
+.product {
+  position: absolute;
+  width: 40%;
+  height: 100%;
+  top: 10%;
+  left: 60%;
+}
+
+.add {
+  width: 85%;
+}
+
+.pick {
+  margin-top: 11px;
+  margin-bottom: 0;
+  margin-left: 20px;
+}
+
+.focus {
+  background: #BA7E7E;
+  color: #F5F5F5;
+}
+
+.imagem_cardapio {
+  width: 150px;
+  margin-top: 40px;
+  padding: 30px;
+}
+
+.titulo_cardapio {
+  font-size: 1.2em;
+  color: #363636;
+  margin-top: -5px;
+}
+
+.linha_cardapio {
+  color: #ff0000;
+  margin-top: -5px;
+}
+
+.paragrafo {
+  margin-top: -10px;
+  font-size: 0.7em;
+  color: #363636;
+  letter-spacing: 1px;
+}
+
+
+
+.button_cardapio {
+  background: #363636;
+  padding: 5px;
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  margin: -1px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #F5F5F5;
+  cursor: pointer;
 }
