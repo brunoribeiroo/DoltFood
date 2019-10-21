@@ -12,7 +12,7 @@ class Pedidos
 		$user = session()->getId();
 			echo "<br>";
 		echo $user."--- novo 6_pedido";
-
+		exit();
 		$pedido_numero=Pedidos::getPedido($user);
 
 		$data= Date('Y-m-d H:i:s');
