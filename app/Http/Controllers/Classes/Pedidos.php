@@ -10,8 +10,8 @@ class Pedidos
 	
 	public static function getPedidoGeral($user){
 		$user = session()->getId();
-		/*	echo "<br>";
-		echo $user."--- novo 6_pedido";*/
+			echo "<br>";
+		echo $user."--- novo 6_pedido";
 
 		$pedido_numero=Pedidos::getPedido($user);
 
