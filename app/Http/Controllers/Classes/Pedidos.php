@@ -10,8 +10,8 @@ class Pedidos
 	
 	public static function getPedidoGeral($user){
 		$user = session()->getId();
-			echo "<br>";
-		echo $user."--- novo 6_pedido";
+		/*	echo "<br>";
+		echo $user."--- novo 6_pedido";*/
 
 		$pedido_numero=Pedidos::getPedido($user);
 
@@ -30,19 +30,19 @@ class Pedidos
 
 		public static function getPedido($user){
 		$retorno=0;
-		echo "<br>";
+	
 		$data= Date('Y-m-d H:i:s');
 		$user = session()->getId();
-		echo "<br>";
+	/*	echo "<br>";
 		echo $user."--- novo s_pedido";
-
+*/
 		$pedido_pendente=DB::table('pedido')
 		->where('pedido_user_temp', '=', $user)
 		->where('pedido_status','=','CRIADO')
 		->select('pedido_id')
 		->get();
-		echo count($pedido_pendente);
-		exit();
+	/*	echo count($pedido_pendente);
+		exit();*/
 		if(count($pedido_pendente)<=0){
 			return $retorno;
 		}else{

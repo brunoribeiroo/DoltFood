@@ -22,7 +22,7 @@ class ControllerPedidos		 extends Controller
     {
 	
        // $this->middleware('autorizador');
-   
+   		
     	Pedidos::MontaPedido();
         
     }
@@ -31,9 +31,9 @@ class ControllerPedidos		 extends Controller
 	
 	public function novo_pedido(){
 		$session_id = session()->getId();
-		echo "<br>";
+/*		echo "<br>";
 		echo $session_id."--- novo pedido";
-		echo "<br>";
+		echo "<br>";*/
 		///selecionar pedido pendente do usuario 
 		$user=$session_id;
 		$pedido_numero=Pedidos::getPedidoGeral($user);
