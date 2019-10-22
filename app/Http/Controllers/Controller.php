@@ -63,6 +63,7 @@ class Controller extends BaseController
         return view('produto/formulario');
     }
 
+
    public function adiciona(){
         //pegar informações do formulario
         $params=Request::all();

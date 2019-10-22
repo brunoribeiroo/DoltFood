@@ -7,6 +7,8 @@ Route:: post('/login_auth',['uses'=>'LoginController@login']);
 Route:: get('/login/novo',['uses'=>'LoginController@novo']);
 Route:: post('/login/registro',['uses'=>'LoginController@registro']);
 
+Route:: get('/logout',['uses'=>'LoginController@LogOut']);
+
 Route:: get('/',['uses'=>'ControllerPedidos@novo_pedido']);
 Route:: get('/produtos/mostra/{id}',['uses'=>'Controller@mostra']);
 Route:: get('/produtos/remove/{id}',['uses'=>'Controller@remove']);

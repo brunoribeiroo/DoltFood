@@ -129,8 +129,22 @@
    	 <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
                         <span>Menu</span>
-                    </button>    
+                    </button> 
 
+                    
+                     <?php 
+            if(\Auth::check()){?>
+                      <button onclick="window.location.href='/logout'" type="button" id="sidebarCollapse" class="btn btn-info">
+                       
+                        <span>Sair</span>
+                    </button>   
+                   <?php } else {?>
+    <button onclick="window.location.href='/login'"type="button" id="sidebarCollapse" class="btn btn-info">
+                       
+                        <span>Entrar</span>
+                    </button> 
+
+                   <?php } ?>
 
 
 <h1></h1>
