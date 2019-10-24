@@ -21,9 +21,7 @@ class LoginController extends Controller
 
     	if(Auth::attempt($credenciais)){
     		return redirect('ingrediente/');
-    	}else{
-            
-
+    	}else{    
     		return redirect('login/');
     	}
     }
@@ -52,5 +50,4 @@ class LoginController extends Controller
         return redirect('/login');
     }
 
-    
 }
