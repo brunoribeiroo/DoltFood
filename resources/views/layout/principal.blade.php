@@ -98,9 +98,6 @@
             <table class="table">
             <?php
      
-            echo "<pre>";
-            print_r($pedido_cardapio);
-            echo "</pre>";
 
             if(isset($pedido_cardapio)){              
 
