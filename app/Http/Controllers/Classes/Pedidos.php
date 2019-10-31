@@ -85,8 +85,7 @@ class Pedidos
 			->select("*")->get();
 		
 
-		return view()->with('pedido_cardapio',$pedido_cardapio);
-
+		return $pedido_cardapio;
 	}
 
 
