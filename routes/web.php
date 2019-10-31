@@ -40,7 +40,7 @@ Route:: get('/pedido/lista_ingredientes/{id}&{id2}',['uses'=>'ControllerPedidos@
 Route:: get('/pedido/salvar/{pedido_id}',['uses'=>'ControllerPedidos@salva_pedido']);
 Route:: get('/pedido/update/{pedido}&{cardapio}',['uses'=>'ControllerPedidos@update']);
 
-
+Route:: get('/grafico/lista/',['uses'=>'ControllerGraficos@lista_graficos']);
 
 Route:: get('/tipo_cardapio/',['uses'=>'ControllerTipoCardapio@listagem']);
 Route:: get('/tipo_cardapio/novo',['uses'=>'ControllerTipoCardapio@novo']);
