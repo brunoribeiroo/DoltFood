@@ -7,10 +7,23 @@ use Illuminate\Support\Facades\DB;
 class Pedidos
 {
 
+	public function __construct(){
+
+	}
+	public static function getPedidoSession(){
+		if(!isset($_COOKIE['pedido_entrado'])){
+			$_COOKIE['pedido_entrado']='produto_'.md5('pedido_1');
+			return $_COOKIE['pedido_entrado'];
+		}else{
+			return $_COOKIE['pedido_entrado'];
+		}
+	
+    	return false;
+	}
 	
 	public static function getPedidoGeral($user){
-		$user = session()->getId();
-	
+		$user=Pedidos::getPedidoSession();
+
 		$pedido_numero=Pedidos::getPedido($user);
 
 		$data= Date('Y-m-d H:i:s');
@@ -30,7 +43,8 @@ class Pedidos
 		$retorno=0;
 	
 		$data= Date('Y-m-d H:i:s');
-		$user = session()->getId();
+		$user=Pedidos::getPedidoSession();
+
 	/*	echo "<br>";
 		echo $user."--- novo s_pedido";
 */
@@ -55,25 +69,23 @@ class Pedidos
 	}
 
 	public static function MontaPedido(){
-		$user = session()->getId();
+		$user=Pedidos::getPedidoSession();
 
-		//echo $user;
-			$pedido_cardapio=DB::table('pedido_x_ingrediente')
-		->join('cardapio','cardapio.cardapio_id','=','pedido_x_ingrediente.cardapio_id')
-		->join('pedido','pedido.pedido_id','=','pedido_x_ingrediente.pedido_id')	
 	
-		->where('cardapio_ativo','=','1')
 
-		->where('pedido_user_temp','=',$user)
+
+	$pedido_cardapio=DB::table('pedido_x_ingrediente')
+			->join('cardapio','pedido_x_ingrediente.cardapio_id','=','cardapio.cardapio_id')
+			->join('ingrediente','ingrediente.ingrediente_id','=','pedido_x_ingrediente.ingrediente_id')
+			->join('pedido','pedido_x_ingrediente.pedido_id','=','pedido.pedido_id')
+			->where('cardapio_ativo', '=', '1')
+			
+		->where('pedido_user_temp','=',"".$user."")
+	
+			->select("*")->get();
 		
-		->select("*")->get();
 
-	
-	/*	echo "<pre>";
-		print_r($pedido_cardapio);
-		echo "</pre>";
-		exit();*/
-		return $pedido_cardapio;
+		return view()->with('pedido_cardapio',$pedido_cardapio);
 
 	}
 

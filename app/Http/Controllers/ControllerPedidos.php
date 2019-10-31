@@ -23,19 +23,16 @@ class ControllerPedidos		 extends Controller
 	
        // $this->middleware('autorizador');
    		
-    	Pedidos::MontaPedido();
-        
+
+    	$pedido_cardapio=Pedidos::MontaPedido();
+    	
+
     }
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests; 
 
 	
 	public function novo_pedido(){
-		$session_id = session()->getId();
-/*		echo "<br>";
-		echo $session_id."--- novo pedido";
-		echo "<br>";*/
-		///selecionar pedido pendente do usuario 
-		$user=$session_id;
+		$user=Pedidos::getPedidoSession();
 		$pedido_numero=Pedidos::getPedidoGeral($user);
 
 
@@ -131,6 +128,9 @@ class ControllerPedidos		 extends Controller
 
 
 		return view('pedidos/lista_ingredientes')->with('retorno',$array_retorno);
+
+
+
 	}
 	public function lista_pedido_vendedor(){
 		$pedido_id=Request::route('id');
@@ -198,9 +198,7 @@ class ControllerPedidos		 extends Controller
 	}
 	public function lista_cardapio(){
 		$pedido_id=0;
-		$session_id = session()->getId();
-		///selecionar pedido pendente do usuario 
-		$user=$session_id;
+$user=Pedidos::getPedidoSession();
 
 		//PHPSSEID
 	

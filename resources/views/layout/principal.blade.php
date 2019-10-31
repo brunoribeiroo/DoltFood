@@ -90,10 +90,15 @@
             ?>
             <table class="table">
             <?php
-            if(isset($retorno['pedido_cardapio'])){              
+     
+            echo "<pre>";
+            print_r($pedido_cardapio);
+            echo "</pre>";
 
-            $pedido_cardapio=$retorno['pedido_cardapio'];
-         foreach($pedido_cardapio as $p):?>
+            if(isset($pedido_cardapio)){              
+
+           
+            foreach($pedido_cardapio as $p):?>
 <?php
  $cardapio_descr=$p->cardapio_descr;
 

@@ -12,6 +12,11 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public function  __construct(){
+        
+    
+    }
+
     public function homepage(){
     	$variavel= "HomePage - Sistema Cardapio";
     	return view('welcome',[
