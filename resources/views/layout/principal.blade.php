@@ -96,32 +96,29 @@
         <?php }else{
             ?>
             <table class="table">
-            <?php
-     
-
-            if(isset($pedido_cardapio)){              
-
+            <?php  
+            $cardapio_antigo="";
+            if(session()->get('carrinho')){              
+                $array_carrinho=session()->get('carrinho');
+            
+            for ($i=0; $i < count($array_carrinho); $i++) { 
+                $cardapio_descr=$array_carrinho[$i]['cardapio_descr'];
            
-            foreach($pedido_cardapio as $p):?>
-<?php
- $cardapio_descr=$p->cardapio_descr;
+
 
  if($cardapio_descr!=$cardapio_antigo){?>
-        <td colspan="4"><b><?= $p->cardapio_descr ?></b></td>
+      <tr> <td colspan="4"><b><?= $array_carrinho[$i]['cardapio_descr'] ?></b></td></tr>
 
  <?php }else{?>
 
 
-<?php } ?>
-<tr>
-<td><?= $p->ingrediente_descr ?></td> 
-<td><?= $p->ingrediente_valor ?></td>
+<?php } 
+$cardapio_antigo=$cardapio_descr;
+
+} ?>
 
 
-</td></tr>
 
-<?php $cardapio_antigo=$cardapio_descr; ?>
-<?php endforeach ?>
         <?php   }else{?>
  <button type="button" id="monta_pedido" class="btn btn-info" onclick="window.location.href='/'">
                       Montar Pedido
