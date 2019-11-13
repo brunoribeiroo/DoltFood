@@ -38,7 +38,7 @@
     <label><p class="desc paragrafo"><?php  echo $retorno_principal[$i]['ingrediente']; ?>-<?php  echo $retorno_principal[$i]['tipo_cardapio']; ?></p></label><br>
    
      <div class="buttons">
-      <a class="add button_cardapio" href="/pedido/lista_ingredientes/<?php echo  $retorno_principal[$i]['cardapio_id'].'&'.$retorno_principal[$i]['pedido_id']; ?> ">Adicionar</a>
+      <a  class="btn btn-danger" href="/pedido/lista_ingredientes/<?php echo  $retorno_principal[$i]['cardapio_id'].'&'.$retorno_principal[$i]['pedido_id']; ?> ">Adicionar</a>
     </div>
     
     </div>
