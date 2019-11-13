@@ -82,6 +82,10 @@
                 <li>
                     <a class="tag_a" href="/grafico/lista/">Relatórios</a>
                 </li>
+
+                <li>
+                    <a class="tag_a" href="/pedidostela/lista/">Pedidos Pendentes</a>
+                </li>
                 
             </ul>
 
