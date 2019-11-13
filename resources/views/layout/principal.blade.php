@@ -102,6 +102,9 @@
                 $array_carrinho=session()->get('carrinho');
             
             for ($i=0; $i < count($array_carrinho); $i++) { 
+                if(isset($array_carrinho[$i])){
+                    
+               
                 $cardapio_descr=$array_carrinho[$i]['cardapio_descr'];
            
 
@@ -115,7 +118,7 @@
 <?php } 
 $cardapio_antigo=$cardapio_descr;
 
-} ?>
+}  }?>
 
 
 

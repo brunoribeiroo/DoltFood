@@ -46,17 +46,20 @@ $cardapio_antigo="";
 			//$array_carrinho=$array_carrinho[$pedido_id];
 
 			for ($i=0; $i < count($array_carrinho); $i++) { 
+				if(isset($array_carrinho[$i])){
+
+
 				$cardapio_descr=$array_carrinho[$i]['cardapio_descr'];
 			if($cardapio_descr!=$cardapio_antigo){?>
 					<tr><td colspan="4"><b><?= $cardapio_descr ?></b></td></tr>
 					<td><?= $array_carrinho[$i]['ingrediente_descr'] ?></td> 
 
-<td><a href='/pedido/excluir/<?= $array_carrinho[$i]['ingrediente_id'] ?>&<?php echo  $pedido_id; ?>&<?php echo  $array_carrinho[$i]['cardapio_id']; ?>' > Excluir </a></td> 
+<td><a href='/pedido/excluir/<?= $i; ?>&<?php echo  $pedido_id; ?>&<?php echo  $array_carrinho[$i]['cardapio_id']; ?>' > Excluir </a></td> 
 			<?php }else{ ?>
 					<tr>
 <td><?= $array_carrinho[$i]['ingrediente_descr'] ?></td> 
 
-<td><a href='/pedido/excluir/<?= $array_carrinho[$i]['ingrediente_id'] ?>&<?php echo  $pedido_id; ?>&<?php echo  $array_carrinho[$i]['cardapio_id']; ?>' > Excluir </a></td>  
+<td><a href='/pedido/excluir/<?= $i; ?>&<?php echo  $pedido_id; ?>&<?php echo  $array_carrinho[$i]['cardapio_id']; ?>' > Excluir </a></td>  
 
 </tr>
 
@@ -65,6 +68,7 @@ $cardapio_antigo="";
 			}
 
 			 $cardapio_antigo=$cardapio_descr; 
+			 }
 			}
 ?>
 

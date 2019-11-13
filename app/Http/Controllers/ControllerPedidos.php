@@ -73,6 +73,8 @@ class ControllerPedidos		 extends Controller
 		return view('pedidos/novo_pedido')->with('retorno_principal',$retorno_principal);
 	}
 
+
+
 	public function lista_ingredientes(){
 
 		$cardapio_id=Request::route('id');
@@ -80,15 +82,15 @@ class ControllerPedidos		 extends Controller
 		$cardapio=array();
 
 
+		$carrinho=session()->get('carrinho');
 
-		$registros_ingrediente=DB::table('pedido_x_ingrediente')
-		->where('pedido_id','=',$pedido_id)
-		->where('cardapio_id','=',$cardapio_id)
-		->count();
+
+		if(true){
+			
 		//ingredientes id vao ser isneridos na session
 
 
-		if($registros_ingrediente<=0){
+		if(true){
 			//se não tiver ingrediente
 			//seleciona os ingredientes do cardapio
 			//remove todos os ingredientes_id e inserre novamente com o cardapio
@@ -105,9 +107,7 @@ class ControllerPedidos		 extends Controller
 		->select("*")->get();
 
 
-		if(isset($carrinho[$pedido_id])){
-			unset($carrinho[$pedido_id]);
-		}
+		
 
 
 /*
@@ -134,6 +134,7 @@ class ControllerPedidos		 extends Controller
 					$i++;
  			}
 
+ 			session()->put('carrinho',$carrinho);
  		
 
 		}else{
@@ -186,6 +187,7 @@ class ControllerPedidos		 extends Controller
 
 
 
+		}
 
 		return view('pedidos/lista_ingredientes')->with('pedido_id',$pedido_id);
 
@@ -234,15 +236,34 @@ class ControllerPedidos		 extends Controller
 
 	}
 	public function excluir(){
-		$igrediente=Request::route("id");
+		$array_lista=session()->get('carrinho');
+
+		$igrediente_id=Request::route("id");
 		$pedido=Request::route("id2");
 		$cardapio=Request::route("id3");
 
-			DB::table('pedido_x_ingrediente')
+		$carrinho=session()->get('carrinho');
+		//echo $carrinho[$pedido];
+
+		if(isset($carrinho[$igrediente_id])){
+			
+			unset($carrinho[$igrediente_id]);
+			
+			//exit();
+		}else
+		{	
+			
+		}
+
+
+		session()->put('carrinho',$carrinho);
+
+
+		/*	DB::table('pedido_x_ingrediente')
 			->where('pedido_id', '=', $pedido)   
 			 ->where('ingrediente_id', '=', $igrediente)        
 			->delete();
-
+*/
 			return redirect('/pedido/lista_ingredientes/'.$cardapio."&".$pedido);
 		
 	}
@@ -292,6 +313,20 @@ $user=Pedidos::getPedidoSession();
 
 	public function lista_pedido(){
 		
+	}
+
+	public function addCardapio(){
+	/*	if(isset(session()->get('carrinho'))){
+			$max=max(session()->get('carrinho'));
+			echo $max;
+			exit();
+
+
+		}*/
+
+
+
+
 	}
 
 
