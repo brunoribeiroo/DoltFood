@@ -37,6 +37,7 @@ Route:: get('/pedido/lista/',['uses'=>'ControllerPedidos@lista_cardapio']);
 Route:: get('/pedido/novo/{id}',['uses'=>'ControllerPedidos@novo_pedido']);
 Route:: get('/pedido/excluir/{id}&{id2}&{id3}',['uses'=>'ControllerPedidos@excluir']);
 Route:: get('/pedido/lista_ingredientes/{id}&{id2}',['uses'=>'ControllerPedidos@lista_ingredientes']);
+Route:: get('/pedido/addCardapio/{id}&{id2}',['uses'=>'ControllerPedidos@addCardapio']);
 Route:: get('/pedido/salvar/{pedido_id}',['uses'=>'ControllerPedidos@salva_pedido']);
 Route:: get('/pedido/update/{pedido}&{cardapio}',['uses'=>'ControllerPedidos@update']);
 

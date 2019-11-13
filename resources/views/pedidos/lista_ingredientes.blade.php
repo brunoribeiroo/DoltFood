@@ -42,10 +42,11 @@ $cardapio_antigo="";
 			
 			
 			$array_carrinho=session()->get('carrinho');
-		
+			
+
 			//$array_carrinho=$array_carrinho[$pedido_id];
 
-			for ($i=0; $i < count($array_carrinho); $i++) { 
+			for ($i=; $i < count($array_carrinho); $i++) { 
 				if(isset($array_carrinho[$i])){
 
 

@@ -401,6 +401,7 @@ a.article:hover {
 .linha_cardapio {
   color: #ff0000;
   margin-top: -5px;
+  font-size: 1.2em;
 }
 
 .paragrafo {
@@ -408,6 +409,9 @@ a.article:hover {
   font-size: 0.7em;
   color: #363636;
   letter-spacing: 1px;
+  word-wrap: break-word;
+  width: 30%;
+
 }
 
 

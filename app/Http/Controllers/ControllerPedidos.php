@@ -75,69 +75,20 @@ class ControllerPedidos		 extends Controller
 
 
 
-	public function lista_ingredientes(){
+	public function lista_ingredientes($cardapio_id=false,$pedido_id=false){
 
-		$cardapio_id=Request::route('id');
+		if(!$cardapio_id){
+			$cardapio_id=Request::route('id');
 		$pedido_id=Request::route('id2');
+		}
+		
 		$cardapio=array();
 
 
 		$carrinho=session()->get('carrinho');
 
 
-		if(true){
-			
-		//ingredientes id vao ser isneridos na session
-
-
-		if(true){
-			//se não tiver ingrediente
-			//seleciona os ingredientes do cardapio
-			//remove todos os ingredientes_id e inserre novamente com o cardapio
-
-
-		$pedido_cardapio=DB::table('cardapio_x_ingrediente')
-		->join('cardapio','cardapio.cardapio_id','=','cardapio_x_ingrediente.cardapio_id')
-		->join('ingrediente','ingrediente.ingrediente_id','=','cardapio_x_ingrediente.ingrediente_id')
-		
-		->where('cardapio_ativo', '=', '1')
-		->where('cardapio.cardapio_id','=',$cardapio_id)
-		->orderBy('cardapio.cardapio_id')
-		
-		->select("*")->get();
-
-
-		
-
-
-/*
-		$pedido_listagem=DB::table('pedido')
-		->where('pedido_id','=',$pedido_id)
-		->where('pedido_status','=','CRIADO')->select("*")->get();
-
-		foreach($pedido_listagem as $t){
-			DB::table('pedido_x_ingrediente')
-			->where('pedido_id', '=', $pedido_id)       
-			 
-			->where('cardapio_id', '=', $cardapio_id)        
-			->delete();
-		}*/
-		$i=0;
-		foreach($pedido_cardapio as $p){
-					$carrinho[$i]['ingrediente_id']=$p->ingrediente_id;
-					$carrinho[$i]['ingrdiente_descr']=$p->ingrediente_descr;
-					$carrinho[$i]['ingrediente_valor']=$p->ingrediente_valor;
-					$carrinho[$i]['cardapio_descr']=$p->cardapio_descr;
-					$carrinho[$i]['cardapio_id']=$p->cardapio_id;
-					$carrinho[$i]['pedido_id']=$pedido_id;
-
-					$i++;
- 			}
-
- 			session()->put('carrinho',$carrinho);
- 		
-
-		}else{
+		if(!isset($carrinho)){
 			$pedido_cardapio=DB::table('pedido_x_ingrediente')
 			->join('cardapio','pedido_x_ingrediente.cardapio_id','=','cardapio.cardapio_id')
 			->join('ingrediente','ingrediente.ingrediente_id','=','pedido_x_ingrediente.ingrediente_id')
@@ -177,17 +128,6 @@ class ControllerPedidos		 extends Controller
 		}
 
 
-
-		/*
-		$array_retorno=array('pedido_cardapio'=>$pedido_cardapio,'pedido_id'=>$pedido_id);
-		*/
-
-
-
-
-
-
-		}
 
 		return view('pedidos/lista_ingredientes')->with('pedido_id',$pedido_id);
 
@@ -324,12 +264,47 @@ $user=Pedidos::getPedidoSession();
 
 		}*/
 
+			$cardapio_id=Request::route('id');
+		$pedido_id=Request::route('id2');
+	
+		$pedido_cardapio=DB::table('cardapio_x_ingrediente')
+		->join('cardapio','cardapio.cardapio_id','=','cardapio_x_ingrediente.cardapio_id')
+		->join('ingrediente','ingrediente.ingrediente_id','=','cardapio_x_ingrediente.ingrediente_id')
+		
+		->where('cardapio_ativo', '=', '1')
+		->where('cardapio.cardapio_id','=',$cardapio_id)
+		->orderBy('cardapio.cardapio_id')
+		
+		->select("*")->get();
+		$carrinho=session()->get('carrinho');
+		foreach ($pedido_cardapio as $p) {
+		$i=1;
+		
+	$id= array_search(max($carrinho), $carrinho);
+	$array_id=$id+$i;
+			$carrinho[$array_id]['ingrediente_id']=$p->ingrediente_id;
+					$carrinho[$array_id]['ingrediente_descr']=$p->ingrediente_descr;
+					$carrinho[$array_id]['ingrediente_valor']=$p->ingrediente_valor;
+					$carrinho[$array_id]['cardapio_descr']=$p->cardapio_descr;
+					$carrinho[$array_id]['cardapio_id']=$p->cardapio_id;
+					$carrinho[$array_id]['pedido_id']=$pedido_id;
+
+			
+		}
+
+
+
+
+			session()->put('carrinho',$carrinho);
+
+
+			return redirect('/pedido/lista_ingredientes/'.$cardapio_id."&".$pedido_id);
 
 
 
 	}
 
-
+		
 
 	
 }
