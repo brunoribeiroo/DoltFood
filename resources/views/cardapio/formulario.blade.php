@@ -2,6 +2,8 @@
 
 @section('conteudo')
 
+<h2> Novo Cardapio </h2>
+
 <form action="/cardapio/adiciona/" method="post" enctype="multipart/form-data">
 	<div class="form-group">
 		<input type="hidden" value="{{csrf_token()}}" name="_token" >

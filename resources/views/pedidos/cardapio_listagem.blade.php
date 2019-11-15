@@ -8,7 +8,7 @@
 	
 
 	?>
-
+<h2> Novo Pedido </h2>
 
 <table class="table table-striped table-bordered table-hover">
 	<tr>	

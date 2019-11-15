@@ -2,6 +2,8 @@
 
 @section('conteudo')
 
+<h2> Selecione os ingredientes do Lanche </h2>
+
 <form action="/cardapio/monta_cardapio" method="POST">
 <span>Lista de Ingrediente :</span>
 <select name="ingrediente_id">

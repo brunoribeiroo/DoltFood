@@ -2,6 +2,7 @@
 
 @section('conteudo')
 
+<h2> Relatórios </h2>
 <div class="chart-container" style="float: left; height:10vh; width:40vw;">
 <h2> Pedidos realizados por funcionários no mês</h2>
 <canvas id="pie-chart" width="800" height="450"></canvas>
@@ -42,20 +43,22 @@ var bar = new Chart(ctx, {
     labels: ["X-Burguer", "X-egg", "X-Salada", "Refrigerante", "Açai"],
     datasets: [{
       label: 'Lanches',
-      data: [12, 19, 3, 5, 5],
+      data: [200, 140, 200, 190, 110, 90],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
         'rgba(255, 206, 86, 0.2)',
         'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)'
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(75, 192, 192, 0.2)'
       ],
       borderColor: [
         'rgba(255,99,132,1)',
         'rgba(54, 162, 235, 1)',
         'rgba(255, 206, 86, 1)',
         'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)'
+        'rgba(153, 102, 255, 1)',
+        'rgba(75, 192, 192, 0.2)'
       ],
       borderWidth: 2
     }]
