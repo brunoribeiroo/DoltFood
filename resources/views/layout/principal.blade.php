@@ -37,13 +37,20 @@
                 <h3>DoltFood</h3>
             </div>
             <?php 
+
+         /*   echo "<pre>";
+            print_r($_SERVER);
+            echo "</pre>";*/
+
+            
+
             if(\Auth::check()){?>
             <ul class="list-unstyled components">
                
-                <li class="active">
+                <li      >
                     <a class="tag_a" href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cardapio</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
+                        <li   >
                             <a class="tag_a" href="/cardapio/" >Lista</a>
                         </li>
                         <li>
@@ -57,7 +64,7 @@
                         </li>
                     </ul>
                 </li>
-                  <li >
+                  <li     >
                     <a class="tag_a" href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Ingredientes</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
@@ -75,15 +82,15 @@
                     </ul>
                 </li>
           
-                <li>
-                    <a class="tag_a" href="/pedido/lista/">Novo Pedido</a>
+                <li    >
+                    <a class="tag_a" href="/">Novo Pedido</a>
                 </li>
                 
-                <li>
+                <li    >
                     <a class="tag_a" href="/grafico/lista/">Relatórios</a>
                 </li>
 
-                <li>
+                <li    >
                     <a class="tag_a" href="/pedidostela/lista/">Pedidos Pendentes</a>
                 </li>
                 

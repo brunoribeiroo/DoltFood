@@ -171,7 +171,7 @@ a.article:hover {
     left: 85%;
     height: 100vh;
     z-index: 999;
-    background: red;
+    background: #C2494A;
     color: #fff;
     transition: all 0.3s;
 }
@@ -182,12 +182,12 @@ a.article:hover {
 
 #sidebar-right .sidebar-header {
     padding: 20px;
-    background: red;
+    background: #C2494A;
 }
 
 #sidebar-right ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid red;
+    border-bottom: 1px solid #C2494A;
 }
 
 #sidebar-right ul p {
@@ -202,14 +202,14 @@ a.article:hover {
 }
 
 #sidebar-right ul li a:hover {
-    color: red;
+    color: #C2494A;
     background: #fff;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: red;
+    background: #C2494A;
 }
 
 a[data-toggle="collapse"] {
@@ -227,7 +227,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-right: 30px !important;
-    background: red;
+    background: #C2494A;
 }
 
 ul.CTAs {
@@ -244,12 +244,12 @@ ul.CTAs a {
 
 a.download {
     background: #fff;
-    color: red;
+    color: #C2494A;
 }
 
 a.article,
 a.article:hover {
-    background: red !important;
+    background: #C2494A !important;
     color: #fff !important;
 }
 

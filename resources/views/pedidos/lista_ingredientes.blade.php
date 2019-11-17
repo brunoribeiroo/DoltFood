@@ -4,11 +4,12 @@
 
 <br>
 <?php 
+
 $cardapio_descr_nome="";
 
 
-$pedido_id=$pedido_id;
 
+$pedido_id=$pedido_id;
 
 
 /*foreach($pedido_cardapio as $t){
@@ -42,11 +43,12 @@ $cardapio_antigo="";
 			
 			
 			$array_carrinho=session()->get('carrinho');
-			
 
-			//$array_carrinho=$array_carrinho[$pedido_id];
-
-			for ($i=; $i < count($array_carrinho); $i++) { 
+			echo "<pre>";
+			print_r($array_carrinho);
+			echo "</pre>";
+		
+			for ($i=0; $i <= 100; $i++) { 
 				if(isset($array_carrinho[$i])){
 
 
@@ -75,7 +77,7 @@ $cardapio_antigo="";
 
 
 <br>
-<a href='/pedido/salvar/<?php echo $pedido_id;?>'>Confirmar </a>
+
 
 <div id="conteudo">
 	
@@ -85,6 +87,10 @@ $cardapio_antigo="";
 
 </table>
 
+
+<button type="button" id="sidebarCollapse" class="btn btn-info" onclick="window.location.href='/pedidos/finalizar/'">
+                        <span>Finalizar pedido</button>   </span>
+                    </button>   
 
 
 
