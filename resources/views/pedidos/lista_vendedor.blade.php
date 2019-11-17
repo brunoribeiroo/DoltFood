@@ -2,12 +2,7 @@
 
 @section('conteudo')
 <?php
-	
-/*	echo "<pre>";
-	print_r($pedido_ingrediente);
-	echo "</pre>";
 
-	exit();*/
 
 	foreach ($pedido_ingrediente as $p) {
 		
@@ -18,8 +13,10 @@
 	?>
 
 	
-<a href="/pedido/novo/<?php echo $pedido; ?>" >Novo pedido</a>
 
+<center><button type="button" id="sidebarCollapse" class="btn btn-danger" onclick="window.location.href='/pedido/finalizar_vendedor/<?php echo $pedido;?>' ">
+                        <span>Finalizar Pedido</span>
+                    </button>   </center>
 <table class="table table-striped table-bordered table-hover">
 	<tr>
 		<th>Cardápio </th>
@@ -39,7 +36,7 @@
 		<td><?= $t->tipo_ingr_descr ?></td>
 	
 		<td><?= $t->pedido_status ?></td>
-		<td><a href="/pedido/update/<?=$t->cardapio_id ?>&<?=$pedido ?>" >Editar</a></td>
+		
 		<td><a href="/cardapio/monta/<?=$t->cardapio_id ?>" >Excluir</a></td>
 
 	</tr>

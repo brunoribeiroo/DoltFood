@@ -15,7 +15,8 @@ Route:: get('/produtos/remove/{id}',['uses'=>'Controller@remove']);
 Route:: post('/pedidos/gerarQR',['uses'=>'ControllerPedidos@gerarQR']);
 Route:: get('/produtos/novo',['uses'=>'Controller@novo']);
 Route:: post('/produtos/adiciona',['uses'=>'Controller@adiciona']);
-Route:: get('/produtos/lista_vendedor/{pedido_id}',['uses'=>'ControllerPedidos@lista_pedido_vendedor']);
+Route:: get('/pedido/lista_vendedor/{pedido_id}',['uses'=>'ControllerPedidos@lista_pedido_vendedor']);
+Route:: get('/pedido/finalizar_vendedor/{pedido_id}',['uses'=>'ControllerPedidos@finaliza_vendedor']);
 Route:: get('/pedidos/finalizar',['uses'=>'ControllerPedidos@finalizar']);
 
 

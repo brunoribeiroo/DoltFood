@@ -8,7 +8,7 @@ use Endroid\QrCode\Response\QrCodeResponse;
 class QRcode1  {
 	 public static function QRCODE($id){
 
-		$qrCode = new QrCode('http://192.168.43.226:7945/produtos/lista_vendedor/'.$id);
+		$qrCode = new QrCode('http://192.168.15.10:8000/pedido/lista_vendedor/'.$id);
 		$qrCode->setSize(300);
 		$qrCode->setMargin(10);
 		$qrCode->setEncoding('UTF-8');

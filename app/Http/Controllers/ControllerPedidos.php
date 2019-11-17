@@ -135,6 +135,7 @@ class ControllerPedidos		 extends Controller
 
 	}
 	public function lista_pedido_vendedor(){
+		$this->middleware('autorizador');
 		$pedido_id=Request::route('pedido_id');
 
 		$pedido_ingrediente=0;
@@ -161,6 +162,18 @@ class ControllerPedidos		 extends Controller
 		
 	
 		return view('pedidos/lista_vendedor')->with('pedido_ingrediente',$pedido_ingrediente);
+
+	}
+	public function finaliza_vendedor(){
+		$this->middleware('autorizador');
+		$pedido_id=Request::route('pedido_id');
+		DB::table('pedido')
+            ->where('pedido_id', $pedido_id)
+			->update(['pedido_status' => 'PENDENTE']);
+
+		return redirect('/');
+
+
 
 	}
 	public function gerarQR(PedidosRequest $request){
@@ -230,13 +243,13 @@ class ControllerPedidos		 extends Controller
 				$cardapio_id=$carrinho[$i]['cardapio_id'];
 				$ingrediente_id=$carrinho[$i]['ingrediente_id'];
 
-							// DB::table('pedido_x_ingrediente')->insert([
-    						// ['pedido_id' => $pedido, 'ingrediente_id'=>$ingrediente_id,'cardapio_id'=>$cardapio_id]]);
+							DB::table('pedido_x_ingrediente')->insert([
+    						['pedido_id' => $pedido, 'ingrediente_id'=>$ingrediente_id,'cardapio_id'=>$cardapio_id]]);
 				}
 
 			}
 
-			//session()->remove('carrinho');
+			session()->remove('carrinho');
 		}
 
 		return view('pedidos/finalizar')->with('pedido',$pedido);
