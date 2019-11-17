@@ -135,22 +135,31 @@ class ControllerPedidos		 extends Controller
 
 	}
 	public function lista_pedido_vendedor(){
-		$pedido_id=Request::route('id');
+		$pedido_id=Request::route('pedido_id');
+
 		$pedido_ingrediente=0;
 		$registros_ingrediente=DB::table('pedido_x_ingrediente')
 		->where('pedido_id','=',$pedido_id)		
 		->count();
+
+	
 		if($registros_ingrediente>0){
 			$pedido_ingrediente=DB::table('pedido_x_ingrediente')
-			
-			->join('ingrediente','ingrediente.ingrediente_id','=','pedido_x_ingrediente.ingrediente_id')	
-			
-			->where('pedido_x_ingrediente.pedido_id','=',$pedido_id)
-			->select("*")->get();
+		->join('cardapio','cardapio.cardapio_id','=','pedido_x_ingrediente.cardapio_id')
+		->join('pedido','pedido.pedido_id','=','pedido_x_ingrediente.pedido_id')
+		->join('tipo_cardapio','cardapio.cardapio_tipo','=','tipo_cardapio.tipo_cardapio_id')
+
+		->join('ingrediente','ingrediente.ingrediente_id','=','pedido_x_ingrediente.ingrediente_id')
+			->join('tipo_ingrediente','tipo_ingrediente.tipo_ingr_id','=','ingrediente.ingrediente_tipo')	
+		->where('pedido.pedido_id','=',$pedido_id)
+		->select('*')->get();
+
+	
+	
 		}
 	
 		
-
+	
 		return view('pedidos/lista_vendedor')->with('pedido_ingrediente',$pedido_ingrediente);
 
 	}
@@ -206,6 +215,31 @@ class ControllerPedidos		 extends Controller
 */
 			return redirect('/pedido/lista_ingredientes/'.$cardapio."&".$pedido);
 		
+	}
+
+	public function finalizar(){
+		$carrinho=session()->get('carrinho');
+
+		$pedido=0;
+		if(count($carrinho)>0){
+			for($i=0;$i<=max(array_keys($carrinho));$i++){
+				if(isset($carrinho[$i])){
+
+
+				$pedido=$carrinho[$i]['pedido_id'];
+				$cardapio_id=$carrinho[$i]['cardapio_id'];
+				$ingrediente_id=$carrinho[$i]['ingrediente_id'];
+
+							// DB::table('pedido_x_ingrediente')->insert([
+    						// ['pedido_id' => $pedido, 'ingrediente_id'=>$ingrediente_id,'cardapio_id'=>$cardapio_id]]);
+				}
+
+			}
+
+			//session()->remove('carrinho');
+		}
+
+		return view('pedidos/finalizar')->with('pedido',$pedido);
 	}
 	public function  update(){
 		$pedido=Request::route('pedido');
@@ -263,8 +297,12 @@ $user=Pedidos::getPedidoSession();
 
 
 		}*/
+		$carrinho=session()->get('carrinho');
+		
 
-			$cardapio_id=Request::route('id');
+
+	
+		$cardapio_id=Request::route('id');
 		$pedido_id=Request::route('id2');
 	
 		$pedido_cardapio=DB::table('cardapio_x_ingrediente')
@@ -276,12 +314,24 @@ $user=Pedidos::getPedidoSession();
 		->orderBy('cardapio.cardapio_id')
 		
 		->select("*")->get();
-		$carrinho=session()->get('carrinho');
-		foreach ($pedido_cardapio as $p) {
-		$i=1;
 		
-	$id= array_search(max($carrinho), $carrinho);
-	$array_id=$id+$i;
+		$i=1;	
+		foreach ($pedido_cardapio as $p) {
+	
+	
+
+
+		if(!isset($carrinho) || count($carrinho)<=0){
+			session()->put('carrinho',$carrinho);
+			$array_id=$i;
+		}else{
+			$id= max(array_keys($carrinho));
+			$array_id=$id+1;
+
+
+		}
+
+
 			$carrinho[$array_id]['ingrediente_id']=$p->ingrediente_id;
 					$carrinho[$array_id]['ingrediente_descr']=$p->ingrediente_descr;
 					$carrinho[$array_id]['ingrediente_valor']=$p->ingrediente_valor;
@@ -289,15 +339,14 @@ $user=Pedidos::getPedidoSession();
 					$carrinho[$array_id]['cardapio_id']=$p->cardapio_id;
 					$carrinho[$array_id]['pedido_id']=$pedido_id;
 
-			
+			$i++;
 		}
 
 
 
-
 			session()->put('carrinho',$carrinho);
-
-
+		
+			
 			return redirect('/pedido/lista_ingredientes/'.$cardapio_id."&".$pedido_id);
 
 

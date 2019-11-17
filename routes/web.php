@@ -16,6 +16,7 @@ Route:: post('/pedidos/gerarQR',['uses'=>'ControllerPedidos@gerarQR']);
 Route:: get('/produtos/novo',['uses'=>'Controller@novo']);
 Route:: post('/produtos/adiciona',['uses'=>'Controller@adiciona']);
 Route:: get('/produtos/lista_vendedor/{pedido_id}',['uses'=>'ControllerPedidos@lista_pedido_vendedor']);
+Route:: get('/pedidos/finalizar',['uses'=>'ControllerPedidos@finalizar']);
 
 
 Route:: get('/ingrediente/',['uses'=>'ControllerIngrediente@listagem']);
