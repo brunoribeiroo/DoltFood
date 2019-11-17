@@ -1,6 +1,9 @@
 @extends('app')
 
 @section('content')
+
+
+<link rel="stylesheet" type="text/css" href="/css/menu.css">
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
@@ -39,8 +42,7 @@
 
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">Login</button>
-								<a type="button" href="/login/novo" class="btn btn-primary">Registrar</a>
+								<button type="submit" class="btn btn-danger">Login</button>
 
 								</div>
 						</div>

@@ -127,7 +127,7 @@ $cardapio_antigo=$cardapio_descr;
 
 
         <?php   }else{?>
- <button type="button" id="monta_pedido" class="btn btn-info" onclick="window.location.href='/'">
+ <button type="button" id="monta_pedido" class="btn btn-danger" onclick="window.location.href='/'">
                       Montar Pedido
                         
                     </button> 
@@ -139,7 +139,7 @@ $cardapio_antigo=$cardapio_descr;
 
 
    <div id="content">
-   	 <button type="button" id="sidebarCollapse" class="btn btn-info">
+   	 <button type="button" id="sidebarCollapse" class="btn btn-danger">
                         <i class="fas fa-align-left"></i>
                         <span>Menu</span>
                     </button> 
@@ -147,12 +147,12 @@ $cardapio_antigo=$cardapio_descr;
                     
                      <?php 
             if(\Auth::check()){?>
-                      <button onclick="window.location.href='/logout'" type="button" id="sidebarCollapse" class="btn btn-info">
+                      <button onclick="window.location.href='/logout'" type="button" id="sidebarCollapse" class="btn btn-danger">
                        
                         <span>Sair</span>
                     </button>   
                    <?php } else {?>
-    <button onclick="window.location.href='/login'"type="button" id="sidebarCollapse" class="btn btn-info">
+    <button onclick="window.location.href='/login'"type="button" id="sidebarCollapse" class="btn btn-danger">
                        
                         <span>Entrar</span>
                     </button> 
