@@ -2,6 +2,7 @@
 
 @section('conteudo')
 
+<h2> Cadastro de Novo Ingrediente </h2>
 <form action="/ingrediente/adiciona/" method="post">
 	<div class="form-group">
 		<input type="hidden" value="{{csrf_token()}}" name="_token" >

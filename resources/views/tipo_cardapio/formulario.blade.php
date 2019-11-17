@@ -2,6 +2,7 @@
 
 @section('conteudo')
 
+<h2> Cadastro de Novo Cardapio</h2>
 <form action="/tipo_cardapio/adiciona/" method="post">
 	<div class="form-group">
 		<input type="hidden" value="{{csrf_token()}}" name="_token" >

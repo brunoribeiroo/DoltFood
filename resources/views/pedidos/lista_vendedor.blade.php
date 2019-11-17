@@ -16,6 +16,8 @@
 
 
 	?>
+
+	
 <a href="/pedido/novo/<?php echo $pedido; ?>" >Novo pedido</a>
 
 <table class="table table-striped table-bordered table-hover">

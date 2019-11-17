@@ -2,6 +2,7 @@
 
 @section('conteudo')
 
+<h2> Listagem de Cardapios </h2> 
 <table class="table table-striped table-bordered table-hover">
 	<tr>
 		<th>Usuário que criou </th>
