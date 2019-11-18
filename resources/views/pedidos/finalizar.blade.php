@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	
 	window.onload = GerarQR('<?php echo $pedido;?>');
-
+	
 
 
 </script>

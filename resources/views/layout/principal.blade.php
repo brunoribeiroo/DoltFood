@@ -8,14 +8,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- <link rel="stylesheet" type="text/css" href="/css/app.css"> -->   
 	<link rel="stylesheet" type="text/css" href="/css/menu.css">
-      <script src="/js/jquery.js" type="text/javascript" charset="utf-8" async defer></script>
 
-    <script src="/js/funcoes.js" type="text/javascript" charset="utf-8" async defer></script>
+
    
 	<title>DoltFood</title>
 	
     <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.css" >
     <!-- Our Custom CSS -->
 
     <!-- Scrollbar Custom CSS -->
@@ -29,12 +28,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
      <!-- jQuery CDN - Slim version (=without AJAX) -->
 
-    <!-- Popper.JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"  crossorigin="anonymous"></script>
+    
     <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+   
     <!-- jQuery Custom Scroller CDN -->
-    <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+   
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+     <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="/js/funcoes.js" type="text/javascript" charset="utf-8" async defer></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
 
     <script type="text/javascript">
         $(document).ready(function () {
