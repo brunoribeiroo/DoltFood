@@ -131,13 +131,7 @@
             </ul>
 
             <ul class="list-unstyled CTAs">
-                <li>
-                    <a class="tag_a" href="" class="download">Sair</a>
-                </li>
-                <li>
-                    <a class="tag_a" href="" class="download">Fale Conosco</a>
-                </li>
-            </ul>
+
         <?php }else{
             ?>
             <table class="table">
