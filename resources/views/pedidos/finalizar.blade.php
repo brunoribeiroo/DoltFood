@@ -5,6 +5,19 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <script type="text/javascript">
 	
+	function GerarQR(pedido_id) {
+
+	 $.ajax({
+        'processing': true, 
+        'serverSide': true,
+          type: "POST",
+          data: {pedido_id: pedido_id,_token:$('meta[name="csrf-token"]').attr('content')},
+          url: "/pedidos/gerarQR",
+          success: function(s) {
+           document.getElementById('conteudo').innerHTML=s;
+          }
+      });	
+}
 	window.onload = GerarQR('<?php echo $pedido;?>');
 
 
@@ -24,7 +37,7 @@
 
                     if(\Auth::check()){?>
 <center><button type="button" id="sidebarCollapse" class="btn btn-danger" onclick="window.location.href='/pedido/lista_vendedor/<?php echo $pedido;?>' ">
-                        <span>SFinalizar Manualmente</span>
+                        <span>Finalizar Manualmente</span>
                     </button>   </center>
                    <?php }?>
                     

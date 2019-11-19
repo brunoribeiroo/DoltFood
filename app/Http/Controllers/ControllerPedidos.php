@@ -361,6 +361,7 @@ $user=Pedidos::getPedidoSession();
 					$carrinho[$array_id]['ingrediente_descr']=$p->ingrediente_descr;
 					$carrinho[$array_id]['ingrediente_valor']=$p->ingrediente_valor;
 					$carrinho[$array_id]['cardapio_descr']=$p->cardapio_descr;
+					$carrinho[$array_id]['cardapio_valor']=$p->cardapio_valor;
 					$carrinho[$array_id]['cardapio_id']=$p->cardapio_id;
 					$carrinho[$array_id]['pedido_id']=$pedido_id;
 

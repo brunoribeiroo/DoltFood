@@ -41,6 +41,7 @@ class ControllerCardapio extends Controller
  	
     $cardapio_descr=$params['nome_cardapio'];   
     $cardapio_tipo=$params['tipo_cardapio'];
+    $cardapio_valor=$params['cardapio_valor'];
 
     $file = Request::file('image');
    
@@ -50,7 +51,7 @@ class ControllerCardapio extends Controller
    
 
     DB::table('cardapio')->insert([
-    ['cardapio_descr' => $cardapio_descr, 'cardapio_tipo'=>$cardapio_tipo,'cardapio_user'=>$cardapio_user,'cardapio_data_criacao'=>$cardapio_data_criacao]
+    ['cardapio_descr' => $cardapio_descr, 'cardapio_tipo'=>$cardapio_tipo,'cardapio_valor'=>$cardapio_valor,'cardapio_user'=>$cardapio_user,'cardapio_data_criacao'=>$cardapio_data_criacao]
 ]);
 
         $cardapio_imagem = DB::table('cardapio')

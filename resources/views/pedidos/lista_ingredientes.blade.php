@@ -32,6 +32,7 @@ $cardapio_antigo="";
                     <td><button type="button" id="sidebarCollapse" class="btn btn-info" onclick="GerarQR(<?php echo $pedido_id;?>)">
                         <span>Gerar QR Code do Pedidos                      </span>
                     </button>   </td>
+
 		</tr>
 	</tbody>
 </table>
@@ -44,16 +45,18 @@ $cardapio_antigo="";
 			
 			$array_carrinho=session()->get('carrinho');
 
-			echo "<pre>";
-			print_r($array_carrinho);
-			echo "</pre>";
-		
+			$valor=0;
 			for ($i=0; $i <= 100; $i++) { 
 				if(isset($array_carrinho[$i])){
 
 
 				$cardapio_descr=$array_carrinho[$i]['cardapio_descr'];
 			if($cardapio_descr!=$cardapio_antigo){?>
+				<?php
+
+				$valor=$valor+$array_carrinho[$i]['cardapio_valor'];
+
+				 ?>
 					<tr><td colspan="4"><b><?= $cardapio_descr ?></b></td></tr>
 					<td><?= $array_carrinho[$i]['ingrediente_descr'] ?></td> 
 
@@ -74,7 +77,7 @@ $cardapio_antigo="";
 			 }
 			}
 ?>
-
+<tr><TH>TOTAL :</TH><td> R$ <?php echo number_format($valor, 2);?></td></tr>
 
 <br>
 
@@ -86,7 +89,9 @@ $cardapio_antigo="";
 
 
 </table>
+<span style="align:right">
 
+</span><BR>
 
 <button type="button" id="sidebarCollapse" class="btn btn-info" onclick="window.location.href='/pedidos/finalizar/'">
                         <span>Finalizar pedido</button>   </span>

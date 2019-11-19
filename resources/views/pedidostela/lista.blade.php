@@ -56,19 +56,28 @@ foreach ($pedido_atual as $t) {
 
 
 </div>
-<div class="col">
 
-<div class="chronometer">
-        <div id="screen" style="font-size:40px;margin-left: 100px;">00 : 00 : 00 : 00</div>
-    </div>
-</div>
-
-</div>
 <div class="w-100">
     
 <div  class="col" >
-    <img src=<?php echo asset('storage/cardapio/cardapio_'.$cardapio_id.'.PNG')?>  width=300 height=300><h2><?php echo  $cardapio_descr; ?></h2>
+  <div class="container">
+    <div class='row'>
+      <div class="col"><center><img src=<?php echo asset('storage/cardapio/cardapio_'.$cardapio_id.'.PNG')?>  width=300 height=300></center><center><h2><?php echo  $cardapio_descr; ?>
+      </h2></center></div>
     
+      <div  class="col" >
+    <div class="chronometer">
+        <div id="screen" style="font-size:40px;margin-left: 100px;">00 : 00 : 00 : 00</div>
+    </div>
+  </div>
+    
+  </div>
+
+  <div class="row">
+  
+  </div>
+
+
     <div class='container'>
       <div class="row">
           <div class="col" id="bt_finalizar" style="display: none"> <button class="btn btn-danger" onclick="finalizar_pedido()">Finalizar &#9745;</button></div>
@@ -82,12 +91,7 @@ foreach ($pedido_atual as $t) {
 
 
   </div>
-<div class="col" >
-    
 
-
-   
-</div>
 <div class="col">
   <table   class="table table-striped table-bordered table-hover" >
   <tr>
