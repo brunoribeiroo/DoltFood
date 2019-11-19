@@ -17,7 +17,7 @@ class ControllerTipoIngrediente		 extends Controller
     public function __construct()
     {
         $this->middleware('autorizador');
-         QRcode1::QRCODE();
+     
     }
 	//use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
   public function novo(){
