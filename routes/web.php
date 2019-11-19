@@ -46,7 +46,7 @@ Route:: get('/pedido/update/{pedido}&{cardapio}',['uses'=>'ControllerPedidos@upd
 Route:: get('/grafico/lista/',['uses'=>'ControllerGraficos@lista_graficos']);
 
 Route:: get('/pedidostela/lista/',['uses'=>'ControllerPedidosTela@lista_pedidostela']);
-
+Route:: post('/pedidostela/finalizar_cardapio/',['uses'=>'ControllerPedidosTela@finalizar_cardapio']);
 
 Route:: get('/tipo_cardapio/',['uses'=>'ControllerTipoCardapio@listagem']);
 Route:: get('/tipo_cardapio/novo',['uses'=>'ControllerTipoCardapio@novo']);

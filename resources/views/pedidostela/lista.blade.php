@@ -2,137 +2,121 @@
 
 @section('conteudo')
 
+<?php
+$cardapio_pendentes=$dados['cardapio_pendentes'];
+$pedido_atual=$dados['pedido_atual'];
 
+
+$pedido_id=0;
+$cardapio_id=0;
+$cardapio_descr="";
+
+foreach ($pedido_atual as $t) {
+  $pedido_id=$t->pedido_id;
+  $cardapio_id=$t->cardapio_id;
+  $cardapio_descr=$t->cardapio_descr;
+}
+
+?>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <style>
-table {
-  font-family: arial, sans-serif;
-  
-  position: left;
-  margin-left: 20px;
-  
-}
 
-th{
-    background-color: #FF0000;
-}
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: center;
-  padding: 8px;
-}
 
-tr:nth-child(even) {
-  background-color: #ff5c5c;
-  text-align: center;
-}
-
-.gridpedidos{
-    padding: 0px;
-    margin-left: 0px;
-    display: grid;
-    grid-template-columns: 600px 500px;
-}
-
-.button {
-  background-color: #FF0000;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  margin-top: 50px;
-}
-
-#screen {
-    font-family: Calibri,Arial;
-    font-weight: 300;
-    font-size: 45px;
-    width: 330px;
-    height: 50px;
-    color: gray;
-    letter-spacing: 3px;
-}
 </style>
 
-<h2> Pedidos pendentes </h2><br>
-<div class="gridpedidos">
-<div  style="margin-left: 100px">
+<h2> Pedido em Produção</h2><br>
+<div class="container">
+<div class="row"  >
+<div class="col">
 
+<script type="text/javascript">
 
-<table width="250px";>
+</script>
+
+<table  class="table table-striped table-bordered table-hover" >
+
   <tr>
     <th> Pendentes </th>
+    <th> Número do Pedido</th>
   </tr>
+  <?php 
+  foreach ($cardapio_pendentes as $p) {
+
+  ?>
   <tr>
-    <td>X-Egg</td>
+    <td><?php echo $p->cardapio_descr; ?></td>
+    <td><?php echo $p->pedido_id; ?></td>
   </tr>
-  <tr>
-    <td>X-Salada</td>
-  </tr>
-  <tr>
-    <td>X-Burguer</td>
-  </tr>
-  <tr>
-    <td>X-Egg</td>
-  </tr>
+  
+
+  <?php } ?>
 </table>
 
-</div>
 
-
-
-    
-<div>
-    <img src="https://image.flaticon.com/icons/png/512/26/26393.png" width=100 height=100>
-<div style="margin-left: 150px; margin-top: -50px">
-    
-<h2>X-Egg</h2>
-</div>
-<div>
-    <button class="button" onclick="reset()">Finalizar &#9745;</button>
-    <button class="button" onclick="start()">Iniciar &#9658;</button>
-    <button class="button" onclick="stop()">Suspender &#8718;</button>
 
 </div>
-</div>
+<div class="col">
 
-<div ><br><br><br><br><br>
 <div class="chronometer">
-        <div id="screen" style="margin-left: 100px;">00 : 00 : 00 : 00</div>
+        <div id="screen" style="font-size:40px;margin-left: 100px;">00 : 00 : 00 : 00</div>
     </div>
 </div>
 
-
-<div style="margin-left: 80px">
-<div style="margin-left: 50px"><br><br>
-    <h2>Ingredientes</h2>
 </div>
-<div>
-<table width="250px";>
+<div class="w-100">
+    
+<div  class="col" >
+    <img src=<?php echo asset('storage/cardapio/cardapio_'.$cardapio_id.'.PNG')?>  width=300 height=300><h2><?php echo  $cardapio_descr; ?></h2>
+    
+    <div class='container'>
+      <div class="row">
+          <div class="col" id="bt_finalizar" style="display: none"> <button class="btn btn-danger" onclick="finalizar_pedido()">Finalizar &#9745;</button></div>
+
+        <div class="col">  <button class="btn btn-danger" onclick="start()">Iniciar &#9658;</button></div>
+        <div class="col">    <button class="btn btn-danger" onclick="stop()">Suspender &#8718;</button></div>
+      </div>
+    </div>
+    
+  
+
+
+  </div>
+<div class="col" >
+    
+
+
+   
+</div>
+<div class="col">
+  <table   class="table table-striped table-bordered table-hover" >
   <tr>
-    <th> Necessário </th>
+    <th>Ingredientes do Cardápio </th>
   </tr>
+  <?php 
+    foreach ($pedido_atual as $x) {
+    
+
+
+  ?>
   <tr>
-    <td>Pão</td>
+    <td><?php echo $x->ingrediente_descr ?></td>
   </tr>
-  <tr>
-    <td>Hamburguer</td>
-  </tr>
-  <tr>
-    <td>Ovo</td>
-  </tr>
-  <tr>
-    <td>Salada</td>
-  </tr>
+
+
+  <?php
+}
+  ?>
+
 </table>
 </div>
 </div>
+
+  
+
+
 </div>
+
 
 <script type="text/javascript">
     window.onload = function() {
@@ -146,6 +130,7 @@ function start () {
             control = setInterval(cronometro,10);
             isMarch = true;
             }
+            document.getElementById('bt_finalizar').style.display='';
          }
 function cronometro () { 
          timeActual = new Date();
@@ -177,7 +162,9 @@ function resume () {
             acumularResume = timeActu2-acumularTime;
             
             timeInicial.setTime(acumularResume);
+
             control = setInterval(cronometro,10);
+            
             isMarch = true;
             }     
          }
@@ -190,7 +177,33 @@ function reset () {
          acumularTime = 0;
          pantalla.innerHTML = "00 : 00 : 00 : 00";
          }
+  
+  function finalizar_pedido(){
 
+    cc = Math.round(acumularTime2.getMilliseconds()/10);
+         ss = acumularTime2.getSeconds();
+         mm = acumularTime2.getMinutes();
+         hh = acumularTime2.getHours()-21;
+         if (cc < 10) {cc = "0"+cc;}
+         if (ss < 10) {ss = "0"+ss;} 
+         if (mm < 10) {mm = "0"+mm;}
+         if (hh < 10) {hh = "0"+hh;}
+         tempo_atual  = hh+":"+mm+":"+ss+"."+cc;
+         pedido_id='<?php echo $pedido_id;?>';
+         cardapio_id='<?php echo $cardapio_id;?>';
+
+
+     $.ajax({
+        'processing': true, 
+        'serverSide': true,
+          type: "POST",
+          data: {pedido_id: pedido_id,cardapio_id:cardapio_id,tempo_final:tempo_atual,_token:$('meta[name="csrf-token"]').attr('content')},
+          url: "/pedidostela/finalizar_cardapio",
+          success: function(s) {
+           window.location.reload();
+          }
+      }); 
+  }
 </script>
 
 @stop

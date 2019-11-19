@@ -232,20 +232,32 @@ class ControllerPedidos		 extends Controller
 
 	public function finalizar(){
 		$carrinho=session()->get('carrinho');
-
+		$carrinho_antigo=0;
 		$pedido=0;
 		if(count($carrinho)>0){
 			for($i=0;$i<=max(array_keys($carrinho));$i++){
 				if(isset($carrinho[$i])){
 
-
 				$pedido=$carrinho[$i]['pedido_id'];
 				$cardapio_id=$carrinho[$i]['cardapio_id'];
 				$ingrediente_id=$carrinho[$i]['ingrediente_id'];
 
+				if($cardapio_id!=$carrinho_antigo){
+					DB::table('pedido_x_cardapio_status')->insert([
+    						['pedido_id' => $pedido, 'cardapio_id'=>$cardapio_id]]);
+
+				}
+
 							DB::table('pedido_x_ingrediente')->insert([
     						['pedido_id' => $pedido, 'ingrediente_id'=>$ingrediente_id,'cardapio_id'=>$cardapio_id]]);
+
+
+				$carrinho_antigo=$cardapio_id;
+
 				}
+
+
+
 
 			}
 
