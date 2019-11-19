@@ -28,7 +28,7 @@
      <div class="col-sm  cardapio_label">
 <div class="container_cardapio">
   <div class="images">
-    <img width="150px"  height="150px" src=<?php echo asset('storage/cardapio/cardapio_'.$id_imagem.'.PNG')?> >
+    <img width="150px"  height="150px" vspace="50" hspace="10"src=<?php echo asset('storage/cardapio/cardapio_'.$id_imagem.'.PNG')?> >
     
   </div>
   
